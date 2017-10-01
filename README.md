@@ -1,6 +1,10 @@
 # user-stories
 
-> A user stories organizer app
+> A simple user stories organizing app using VueJS & [Vue.Draggable](https://github.com/SortableJS/Vue.Draggable). 
+
+Current functionalities: create user stories, click+drag to categorize and prioritize them, mark as complete, delete.
+
+[Demo](https://user-story-app.herokuapp.com/#/)
 
 ## Build Setup
 
