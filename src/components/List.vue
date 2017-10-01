@@ -38,37 +38,43 @@ export default {
         {
           categoryName: 'Unsorted',
           stories: [{
-            storyTitle: 'entry1',
+            storyTitle: 'Add a new story to give me a buddy!',
             completed: false
           }]
         },
         {
           categoryName: 'Must',
           stories: [{
-            storyTitle: 'entry1',
+            storyTitle: 'Click on my text to mark me as complete!',
             completed: false
           }]
         },
         {
           categoryName: 'Should',
           stories: [{
-            storyTitle: 'entry1',
+            storyTitle: 'Click on the X to delete me!',
             completed: false
           }]
         },
         {
           categoryName: 'Could',
           stories: [{
-            storyTitle: 'entry1',
+            storyTitle: 'Click and drag to change our order!',
+            completed: false
+          },
+          {
+            storyTitle: 'Reorder us!',
             completed: false
           }]
         },
         {
           categoryName: 'Won\'t',
-          stories: [{
-            storyTitle: 'entry1',
-            completed: false
-          }]
+          stories: [
+            {
+              storyTitle: 'Drag me to another section and then put me back!',
+              completed: false
+            }
+          ]
         }
       ]
     }
@@ -159,7 +165,7 @@ export default {
     align-items: center;
     min-height: 100px;   
     position: relative;
-    min-width: 100px; 
+    min-width: 200px; 
   }
 
   .story {

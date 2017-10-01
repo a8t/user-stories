@@ -1,0 +1,10 @@
+{
+  "name": "userstories",
+  "version": "1.0.0",
+  "description": "User Stories App",
+  "author": "Andy",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install express"
+  }
+}
