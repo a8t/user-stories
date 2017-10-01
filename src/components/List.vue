@@ -102,70 +102,110 @@ export default {
 
 <style scoped>
 
+  * {
+    box-sizing: border-box;
+  }
   .grid-container {
     display: grid;
     grid-template-areas: 
-      "a adds     must   b"
-      "a unsorted should b"
-      "a unsorted could  b"
-      "a unsorted wont   b";
-    grid-template-columns: 100px 400px 1fr auto;
+      "a adds     must   "
+      "a unsorted should "
+      "a unsorted could  "
+      "a unsorted wont   ";
+    grid-template-columns: 50px 400px 1fr;
     grid-template-rows: auto;
 
   
   }
 
-    @media only screen and (max-width : 920px){
+  
+  .Unsorted>h1 {
+    display: none;
+  }
+
+
+  @media only screen and (max-width : 920px){
       
     .grid-container {
 
       grid-template-areas: 
-        "a adds   b"
-        "a unsorted  b"
-        "a must   b"
-        "a should  b"
-        "a could      b"
-        "a wont     b";
-      grid-template-columns: 50px 1fr 50px;
+        " adds     "
+        " unsorted "
+        " must     "
+        " should   "
+        " could    "
+        " wont     ";
+      grid-template-columns:  1fr ;
       grid-template-rows: auto;
       }
+
+    .Unsorted {
+      border-bottom: 2px solid grey;
+      padding: 20px;
+      margin: 20px;
     }
 
-    @media only screen and (min-width : 1300px){
+    
+  }
+
+  @media only screen and (min-width : 1450px){
       
     .grid-container {
 
       grid-template-areas: 
-        "a adds     must   should b"
-        "a unsorted could  wont   b";
-      grid-template-columns: 50px 400px auto 50px;
+        "a adds     must   should"
+        "a unsorted could  wont  ";
+      grid-template-columns: 100px 400px 1fr 1fr;
       grid-template-rows: auto;
-      }
     }
+  }
 
   .add {
     grid-area: adds;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   #addinput {
+    box-sizing: -box;
     font-size: 24px;
     padding: 10px;
+    width: 400px;
   }
 
   #addinput:invalid {
     box-shadow: none;
   }
 
+  #log {
+    display: none;
+  }
+
   #addsubmit {
+    border: 2px solid grey;
+    border-radius: 1px;
     height: 30px;
+    background: none;
+    font-size: 20px;
+    width: 100px;
+    
+  }
+
+  #addsubmit:hover {
+    border: 2px solid lightgreen;
+    color: green;
   }
 
   .Unsorted {
     grid-area: unsorted;
     align-self: flex-start;
+  }
+
+  
+  .Unsorted::before {
+    content: "Unsorted items:";
   }
 
   .Must {
@@ -184,9 +224,7 @@ export default {
     grid-area: wont;
   }
 
-  .Unsorted > h1 {
-    display: none;
-  }
+  
 
   .drag,
   .category {
@@ -202,7 +240,7 @@ export default {
   .story {
     /* display: flex; */
     list-style: none;
-    width: 300px;
+    width: 400px;
     padding: 20px;
     border: 1px solid green;
     margin: 2px;
