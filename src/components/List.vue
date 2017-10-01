@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="grid-container">
     <form v-on:submit="addStory" class="add">
-      <input type="text" v-model="newStory.storyTitle">
-      <input type="submit" value="Add to unsorted">
+      <input id="addinput" type="text" v-model="newStory.storyTitle" placeholder="As an X, I can..." required>
+      <br>
+      <input id="addsubmit" type="submit" value="Add">
     </form>
-    <div v-for="category in categories" :key="category.categoryName">
-      <h1>{{category.categoryName}}</h1>
-      <draggable :class="[category.categoryName, 'category']" v-model="category.stories" :options="{group:'stories'}">
+    <div v-for="category in categories" :key="category.categoryName" :class="[category.categoryName, 'category']">
+      <h1>{{category.categoryName}} Have</h1>
+      <draggable class="drag" v-model="category.stories" :options="{group:'stories'}">
         <div class="story" v-for="story in category.stories" :key="story.storyTitle">
           <label v-bind:for="story.storyTitle">
             <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" 
@@ -94,13 +95,73 @@ export default {
 
 <style scoped>
 
+  .grid-container {
+    display: grid;
+    grid-template-areas: 
+      "a adds     must   b"
+      "a unsorted should b"
+      "a unsorted could  b"
+      "a unsorted wont   b";
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+  }
+
+  .add {
+    grid-area: adds;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #addinput {
+    font-size: 24px;
+    padding: 10px;
+  }
+
+  #addinput:invalid {
+    box-shadow: none;
+  }
+
+  #addsubmit {
+    height: 30px;
+  }
+
+  .Unsorted {
+    grid-area: unsorted;
+    align-self: flex-start;
+  }
+
+  .Must {
+    grid-area: must;
+  }
+
+  .Should {
+    grid-area: should;
+  }
+
+  .Could {
+    grid-area: could;
+  }
+
+  .Won\'t {
+    grid-area: wont;
+  }
+
+  .Unsorted > h1 {
+    display: none;
+  }
+
+  .drag,
   .category {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 10px;
+    min-height: 100px;   
+    position: relative;
+    min-width: 100px; 
   }
+
   .story {
     /* display: flex; */
     list-style: none;
