@@ -1,5 +1,6 @@
 <template>
   <div class="grid-container">
+    <button id="log" v-on:click="logData()"></button>
     <form v-on:submit="addStory" class="add">
       <input id="addinput" type="text" v-model="newStory.storyTitle" placeholder="As an X, I can..." required>
       <br>
@@ -10,9 +11,7 @@
       <draggable class="drag" v-model="category.stories" :options="{group:'stories'}">
         <div class="story" v-for="story in category.stories" :key="story.storyTitle">
           <label v-bind:for="story.storyTitle">
-            <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" 
-  v-bind:id="story.storyTitle"
-> 
+            <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" v-bind:id="story.storyTitle"> 
             <span :class="{completed: story.completed}">{{story.storyTitle}}</span>  
             <span :class="[!story.completed ? 'checkmark':'', 'green']">✓ </span>
             <button class="delete" v-on:click="deleteStory(category, story)">X</button>
@@ -87,6 +86,9 @@ export default {
       })
       this.newStory = {}
       e.preventDefault()
+    },
+    logData: function () {
+      console.log(JSON.stringify(this.categories, null, 2))
     },
     deleteStory: function (category, story) {
       let categoryToDeleteFrom = this.categories[this.categories.indexOf(category)]
