@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <h1> Welcome to your simple user story organizer! </h1>
-    
+    <p>
+      Created using <a href="https://vuejs.org/">Vue.js</a> and the <a href="https://github.com/SortableJS/Vue.Draggable">Vue.Draggable</a> component.
+    </p>
   </div>
 </template>
 
