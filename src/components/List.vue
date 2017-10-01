@@ -90,9 +90,8 @@ export default {
     },
     deleteStory: function (category, story) {
       let categoryToDeleteFrom = this.categories[this.categories.indexOf(category)]
-
       categoryToDeleteFrom.stories.splice(
-        categoryToDeleteFrom.stories.indexOf(story)
+        categoryToDeleteFrom.stories.indexOf(story), 1
       )
     }
   }
