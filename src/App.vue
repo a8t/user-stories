@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">list</a></li>
+          <li><a href="/#/about">about</a></li>
+        </ul>
+      </nav>
+    </header>
     <router-view></router-view>
   </div>
 </template>
@@ -19,5 +26,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+nav li {
+  list-style: none;
+  display: inline;
 }
 </style>
