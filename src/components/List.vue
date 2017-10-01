@@ -108,9 +108,39 @@ export default {
       "a unsorted should b"
       "a unsorted could  b"
       "a unsorted wont   b";
-    grid-template-columns: auto;
+    grid-template-columns: 100px 400px 1fr auto;
     grid-template-rows: auto;
+
+  
   }
+
+    @media only screen and (max-width : 920px){
+      
+    .grid-container {
+
+      grid-template-areas: 
+        "a adds   b"
+        "a unsorted  b"
+        "a must   b"
+        "a should  b"
+        "a could      b"
+        "a wont     b";
+      grid-template-columns: 50px 1fr 50px;
+      grid-template-rows: auto;
+      }
+    }
+
+    @media only screen and (min-width : 1300px){
+      
+    .grid-container {
+
+      grid-template-areas: 
+        "a adds     must   should b"
+        "a unsorted could  wont   b";
+      grid-template-columns: 50px 400px auto 50px;
+      grid-template-rows: auto;
+      }
+    }
 
   .add {
     grid-area: adds;
