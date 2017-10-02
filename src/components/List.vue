@@ -2,7 +2,7 @@
   <div class="grid-container">
     <button id="log" v-on:click="logData()"></button>
     <form v-on:submit="addStory" class="add">
-      <h1>Enter User Stories here:</h1>
+      <h1 id="enter">Enter User Stories:</h1>
       <input autocomplete="off" id="addinput" type="text" v-model="newStory.storyTitle" placeholder="As an X, I can..." required>
       <br>
       <input id="addsubmit" type="submit" value="Add">
@@ -97,6 +97,7 @@ export default {
     font-size: 24px;
     padding: 10px;
     max-width: 400px;
+    border: 1px solid lightblue;
   }
 
   #addinput:invalid {
@@ -116,6 +117,10 @@ export default {
   #addsubmit:hover {
     border: 2px solid lightgreen;
     color: green;
+  }
+
+  #enter {
+    padding: 5px;
   }
 
   .Unsorted>h1 {
