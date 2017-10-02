@@ -2,7 +2,8 @@
   <div class="grid-container">
     <button id="log" v-on:click="logData()"></button>
     <form v-on:submit="addStory" class="add">
-      <input id="addinput" type="text" v-model="newStory.storyTitle" placeholder="As an X, I can..." required>
+      <h1>Enter User Stories here:</h1>
+      <input autocomplete="off" id="addinput" type="text" v-model="newStory.storyTitle" placeholder="As an X, I can..." required>
       <br>
       <input id="addsubmit" type="submit" value="Add">
     </form>
@@ -37,43 +38,29 @@ export default {
         {
           categoryName: 'Unsorted',
           stories: [{
-            storyTitle: 'Add a new story to give me a buddy!',
+            storyTitle: 'Click text to mark as done, click X to delete',
+            completed: false
+          },
+          {
+            storyTitle: 'Click+drag to reorder / move to another list',
             completed: false
           }]
         },
         {
           categoryName: 'Must',
-          stories: [{
-            storyTitle: 'Click on my text to mark me as complete!',
-            completed: false
-          }]
+          stories: []
         },
         {
           categoryName: 'Should',
-          stories: [{
-            storyTitle: 'Click on the X to delete me!',
-            completed: false
-          }]
+          stories: []
         },
         {
           categoryName: 'Could',
-          stories: [{
-            storyTitle: 'Click and drag to change our order!',
-            completed: false
-          },
-          {
-            storyTitle: 'Reorder us!',
-            completed: false
-          }]
+          stories: []
         },
         {
           categoryName: 'Won\'t',
-          stories: [
-            {
-              storyTitle: 'Drag me to another section and then put me back!',
-              completed: false
-            }
-          ]
+          stories: []
         }
       ]
     }
@@ -105,27 +92,81 @@ export default {
   * {
     box-sizing: border-box;
   }
-  .grid-container {
-    display: grid;
-    grid-template-areas: 
-      "a adds     must   "
-      "a unsorted should "
-      "a unsorted could  "
-      "a unsorted wont   ";
-    grid-template-columns: 50px 400px 1fr;
-    grid-template-rows: auto;
 
-  
+  #addinput {
+    font-size: 24px;
+    padding: 10px;
+    max-width: 400px;
   }
 
-  
+  #addinput:invalid {
+    box-shadow: none;
+  }
+
+  #addsubmit {
+    border: 2px solid grey;
+    border-radius: 1px;
+    height: 30px;
+    background: none;
+    font-size: 20px;
+    width: 100px;
+    margin-bottom: 20px;
+  }
+
+  #addsubmit:hover {
+    border: 2px solid lightgreen;
+    color: green;
+  }
+
   .Unsorted>h1 {
     display: none;
   }
 
+  .Unsorted::before {
+    content: "Unsorted items:";
+    padding-top: 20px;
+  }
 
-  @media only screen and (max-width : 920px){
-      
+  .drag {
+    min-height: 100px;   
+    width: 100%; 
+    padding: 0px 20px 20px 20px;
+  }
+
+  .add,
+  .category {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin: 10px;
+  }
+
+  .story {
+    padding: 20px;
+    margin: 2px;
+    border: 1px solid green;
+    border-radius: 2px;
+    overflow-wrap: true;
+    position: relative;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-areas: 
+      "adds     must   "
+      "unsorted should "
+      "unsorted could  "
+      "unsorted wont   ";
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  @media only screen and (max-width : 890px){
     .grid-container {
 
       grid-template-areas: 
@@ -137,15 +178,7 @@ export default {
         " wont     ";
       grid-template-columns:  1fr ;
       grid-template-rows: auto;
-      }
-
-    .Unsorted {
-      border-bottom: 2px solid grey;
-      padding: 20px;
-      margin: 20px;
-    }
-
-    
+      }    
   }
 
   @media only screen and (min-width : 1450px){
@@ -153,100 +186,24 @@ export default {
     .grid-container {
 
       grid-template-areas: 
-        "a adds     must   should"
-        "a unsorted could  wont  ";
-      grid-template-columns: 100px 400px 1fr 1fr;
+        " adds     must   should"
+        " unsorted could  wont  ";
+      grid-template-columns: repeat(3, 1fr);
       grid-template-rows: auto;
     }
   }
 
-  .add {
-    grid-area: adds;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  .Unsorted {grid-area: unsorted; }
 
-  #addinput {
-    box-sizing: -box;
-    font-size: 24px;
-    padding: 10px;
-    width: 400px;
-  }
+  .add {grid-area: adds;}
 
-  #addinput:invalid {
-    box-shadow: none;
-  }
+  .Must {grid-area: must;}
 
-  #log {
-    display: none;
-  }
+  .Should {grid-area: should;}
 
-  #addsubmit {
-    border: 2px solid grey;
-    border-radius: 1px;
-    height: 30px;
-    background: none;
-    font-size: 20px;
-    width: 100px;
-    
-  }
+  .Could {grid-area: could;}
 
-  #addsubmit:hover {
-    border: 2px solid lightgreen;
-    color: green;
-  }
-
-  .Unsorted {
-    grid-area: unsorted;
-    align-self: flex-start;
-  }
-
-  
-  .Unsorted::before {
-    content: "Unsorted items:";
-  }
-
-  .Must {
-    grid-area: must;
-  }
-
-  .Should {
-    grid-area: should;
-  }
-
-  .Could {
-    grid-area: could;
-  }
-
-  .Won\'t {
-    grid-area: wont;
-  }
-
-  
-
-  .drag,
-  .category {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100px;   
-    position: relative;
-    min-width: 200px; 
-  }
-
-  .story {
-    /* display: flex; */
-    list-style: none;
-    width: 400px;
-    padding: 20px;
-    border: 1px solid green;
-    margin: 2px;
-    overflow-wrap: true;
-    position: relative;
-  }
+  .Won\'t {grid-area: wont;}
 
   .delete {
     position: absolute;
@@ -256,7 +213,7 @@ export default {
 
   .completed {
     text-decoration: line-through;
-    color: lightgreen;
+    color: #32cd32;
   }
 
   .toggle {
@@ -268,6 +225,10 @@ export default {
   }
 
   .checkmark {
+    display: none;
+  }
+
+  #log {
     display: none;
   }
 
