@@ -8,8 +8,8 @@
       <input id="addsubmit" type="submit" value="Add">
     </form>
     <div v-for="category in categories" :key="category.categoryName" :class="[category.categoryName, 'category']">
-      <h1>{{category.categoryName}} Have</h1>
-      <draggable class="drag" v-model="category.stories" :options="{group:'stories'}">
+        <h1>{{category.categoryName}} Have</h1>
+      <draggable class="drag" v-model="category.stories" :options="{group:'stories', scrollSensitivity:60}">
         <div class="story" v-for="story in category.stories" :key="story.storyTitle">
           <label v-bind:for="story.storyTitle">
             <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" v-bind:id="story.storyTitle"> 
@@ -123,7 +123,7 @@ export default {
     padding: 5px;
   }
 
-  .Unsorted>h1 {
+  .Unsorted h1 {
     display: none;
   }
 
