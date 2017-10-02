@@ -128,7 +128,7 @@ export default {
   }
 
   .drag {
-    min-height: 100px;   
+    height: 100%;
     width: 100%; 
     padding: 0px 20px 20px 20px;
   }
@@ -144,6 +144,7 @@ export default {
     border: 1px solid lightgrey;
     border-radius: 2px;
     margin: 10px;
+    min-height: 100px; 
   }
 
   .story {
