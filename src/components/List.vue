@@ -8,17 +8,19 @@
       <input id="addsubmit" type="submit" value="Add">
     </form>
     <div v-for="category in categories" :key="category.categoryName" :class="[category.categoryName, 'category']">
-        <h1>{{category.categoryName}} Have</h1>
+      <h1>{{category.categoryName}} Have</h1>
+
       <draggable class="drag" v-model="category.stories" :options="{group:'stories', scrollSensitivity:60}">
         <div class="story" v-for="story in category.stories" :key="story.storyTitle">
           <label v-bind:for="story.storyTitle">
-            <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" v-bind:id="story.storyTitle"> 
-            <span :class="{completed: story.completed}">{{story.storyTitle}}</span>  
+            <input type="checkbox" class='toggle' v-model="story.completed" v-bind:name="story.storyTitle" v-bind:id="story.storyTitle">
+            <span :class="{completed: story.completed}">{{story.storyTitle}}</span>
             <span :class="[!story.completed ? 'checkmark':'', 'green']">✓ </span>
             <button class="delete" v-on:click="deleteStory(category, story)">X</button>
           </label>
         </div>
       </draggable>
+
     </div>
   </div>
 </template>
@@ -67,10 +69,10 @@ export default {
   },
   methods: {
     addStory: function (e) {
-      this.categories[0].stories.push({
-        storyTitle: this.newStory.storyTitle,
-        completed: false
-      })
+      this.categories[0].stories = [
+        { storyTitle: this.newStory.storyTitle, completed: false },
+        ...this.categories[0].stories
+      ]
       this.newStory = {}
       e.preventDefault()
     },
@@ -134,48 +136,59 @@ export default {
 
   .drag {
     height: 100%;
-    width: 100%; 
+    width: 100%;
     padding: 0px 20px 20px 20px;
   }
 
   .add,
   .category {
     position: relative;
+    z-index: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 
-    border: 1px solid lightgrey;
+    border: 1px solid rosybrown;
+    background: #FFF5DB;
     border-radius: 2px;
     margin: 10px;
-    min-height: 100px; 
+    min-height: 100px;
+
+    -webkit-box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
+    box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
   }
 
   .story {
     padding: 20px;
-    margin: 2px;
-    border: 1px solid green;
+    margin: 3px;
+    border: 1px solid burlywood;
     border-radius: 2px;
     overflow-wrap: true;
     position: relative;
+    background-color: #FFFEFD;
+    -webkit-box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
+box-shadow: 6px 6px 14px -5px rgba(0,0,0,0.75);
   }
 
   .grid-container {
+
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
       "adds     must   "
       "unsorted should "
       "unsorted could  "
       "unsorted wont   ";
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
+    grid-template-rows: repeat(4,1fr);
   }
 
   @media only screen and (max-width : 890px){
     .grid-container {
 
-      grid-template-areas: 
+      grid-template-areas:
         " adds     "
         " unsorted "
         " must     "
@@ -184,14 +197,14 @@ export default {
         " wont     ";
       grid-template-columns:  1fr ;
       grid-template-rows: auto;
-      }    
+      }
   }
 
   @media only screen and (min-width : 1450px){
-      
+
     .grid-container {
 
-      grid-template-areas: 
+      grid-template-areas:
         " adds     must   should"
         " unsorted could  wont  ";
       grid-template-columns: repeat(3, 1fr);
@@ -213,8 +226,16 @@ export default {
 
   .delete {
     position: absolute;
-    top:2px;
-    right:2px;
+    top:3px;
+    right:3px;
+    background: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .delete:hover {
+    background: pink
   }
 
   .completed {
